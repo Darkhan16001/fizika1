@@ -1,0 +1,167 @@
+
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f2f9ff">
+  <title>PHYSICS LAB | Электр өрісі 3.1.1</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="app">
+  <header class="header">
+    <div class="brand">
+      <div class="logo">⚛</div>
+      <div>
+        <strong>PHYSICS LAB</strong>
+        <small>3.1.1 • Электр өрісі және потенциал</small>
+      </div>
+    </div>
+
+    <div class="header-right">
+      <span class="course">ФИЗИКА • 1-КУРС</span>
+      <span id="timer" class="timer">00:00</span>
+    </div>
+  </header>
+
+  <main id="screen" aria-live="polite"></main>
+
+<div class="live-clock">
+  <span class="clock-label">🕒 ҚАЗІРГІ УАҚЫТ</span>
+  <strong id="currentTime">--:--:--</strong>
+  <small>Алматы уақыты</small>
+</div>
+
+  <footer class="footer">
+    <div class="page-info">
+      <span id="pageLabel">1 / 1</span>
+      <div class="progress">
+        <div id="progressFill"></div>
+      </div>
+    </div>
+
+    <nav class="buttons">
+      <button type="button" onclick="openAttendance()">
+        👥 Оқушылар
+      </button>
+      <button type="button" onclick="openTeams()">
+        🏆 Командалар
+      </button>
+      <button type="button" onclick="showPanel('mathPanel')">
+        🧮 Математика
+      </button>
+      <button type="button" onclick="showPanel('physicsPanel')">
+        ⚡ Физика
+      </button>
+      <button type="button" onclick="changePage(-1)">
+        ← Артқа
+      </button>
+      <button type="button" class="primary"
+              onclick="changePage(1)">
+        Келесі →
+      </button>
+    </nav>
+  </footer>
+</div>
+
+<!-- ҚАТЫСУ ТІЗІМІ -->
+<section id="attendancePanel" class="floating wide hidden">
+  <div class="panel-head">
+    <strong>👥 Оқушылардың қатысуы</strong>
+    <button type="button" onclick="hidePanel('attendancePanel')">
+      ✕
+    </button>
+  </div>
+
+  <p class="hint">
+    Сабаққа келгендерді белгілеңіз.
+    Жоқ оқушылар командаға бөлінбейді.
+  </p>
+
+  <div class="mini-actions">
+    <button onclick="markAll(true)">Барлығы бар</button>
+    <button onclick="markAll(false)">Барлығы жоқ</button>
+  </div>
+
+  <div id="attendanceList" class="student-list"></div>
+
+  <div class="add-student">
+    <input id="newStudent"
+           placeholder="Жаңа оқушының есімі"
+           maxlength="50">
+    <button onclick="addStudent()">Қосу</button>
+  </div>
+
+  <p id="attendanceCount" class="hint"></p>
+
+  <button class="primary full" onclick="randomTeams(true)">
+    🎲 3 командаға кездейсоқ бөлу
+  </button>
+</section>
+
+<!-- КОМАНДАЛАР -->
+<section id="teamsPanel" class="floating wide hidden">
+  <div class="panel-head">
+    <strong>🏆 Үш команданың құрамы</strong>
+    <button onclick="hidePanel('teamsPanel')">✕</button>
+  </div>
+
+  <div id="teamLists"></div>
+
+  <button class="primary full" onclick="randomTeams(true)">
+    🎲 Командаларды қайта араластыру
+  </button>
+</section>
+
+<!-- МАТЕМАТИКАЛЫҚ КАЛЬКУЛЯТОР -->
+<section id="mathPanel" class="floating calculator hidden">
+  <div class="panel-head">
+    <strong>🧮 Математикалық калькулятор</strong>
+    <button onclick="hidePanel('mathPanel')">✕</button>
+  </div>
+
+  <input id="mathDisplay" readonly placeholder="Өрнек">
+  <div id="mathKeys" class="math-keys"></div>
+
+  <div id="mathResult" class="calc-result">
+    Есептеу нәтижесі
+  </div>
+
+  <p class="hint">
+    sin, cos, tan — градуспен есептеледі.
+  </p>
+</section>
+
+<!-- ФИЗИКАЛЫҚ КАЛЬКУЛЯТОР -->
+<section id="physicsPanel"
+         class="floating calculator physics-panel hidden">
+
+  <div class="panel-head">
+    <strong>⚡ Физикалық калькулятор</strong>
+    <button onclick="hidePanel('physicsPanel')">✕</button>
+  </div>
+
+  <label for="formulaSelect">Формула</label>
+  <select id="formulaSelect"
+          onchange="selectFormula()"></select>
+
+  <label for="unknownSelect">Табылатын шама</label>
+  <select id="unknownSelect"
+          onchange="drawPhysicsFields()"></select>
+
+  <div id="physicsFields"></div>
+
+  <button class="primary full" onclick="calculatePhysics()">
+    Есептеу
+  </button>
+
+  <div id="physicsResult" class="calc-result">
+    Белгілі шамаларды енгізіңіз.
+  </div>
+</section>
+
+<script src="script.js"></script>
+</body>
+</html>
